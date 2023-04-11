@@ -1,8 +1,0 @@
-{
-  "name": "trpc-react-express",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com-ajaystha42:ajaystha42/trpc-react-express.git",
-  "author": "Ajay Shrestha",
-  "license": "MIT"
-}
