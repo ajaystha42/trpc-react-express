@@ -3,13 +3,17 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "./routers";
+import { createContext } from "./context";
 
 dotenv.config();
 
 const app: Express = express();
 
 app.use(cors());
-app.use("/trpc", createExpressMiddleware({ router: appRouter }));
+app.use(
+  "/trpc",
+  createExpressMiddleware({ router: appRouter, createContext: createContext })
+);
 
 const port = process.env.PORT || 8080;
 

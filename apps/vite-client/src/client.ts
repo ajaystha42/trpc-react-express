@@ -24,8 +24,17 @@ async function main() {
   //   console.log({ result });
   //
   // user routes
-  const user = await client.users.getUser.query();
+  const user = await client.users.get.query({ userId: "12" });
   console.log({ user });
+
+  const updateUser = await client.users.update.mutate({
+    name: "Ajay",
+    userId: "4",
+  });
+  console.log({ updateUser });
+
+  const login = await client.users.private.query();
+  console.log({ login });
 }
 
 main();
