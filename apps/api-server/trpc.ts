@@ -6,7 +6,7 @@ export const t = initTRPC
   .create();
 
 const isAdminMiddleware = t.middleware(({ ctx, next }) => {
-  if (!ctx.isAdmin) {
+  if (!ctx.isAuthorized) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next({ ctx: { user: { id: 1 } } });

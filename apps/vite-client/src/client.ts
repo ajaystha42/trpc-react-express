@@ -1,10 +1,14 @@
-import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
+import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client";
 import { AppRouter } from "./../../api-server/index";
 
 const client = createTRPCProxyClient<AppRouter>({
   links: [
+    loggerLink(),
     httpBatchLink({
       url: "http://localhost:8080/trpc",
+      headers: {
+        Authorization: "Bearer token",
+      },
     }),
   ],
 });
@@ -24,6 +28,10 @@ async function main() {
   //   console.log({ result });
   //
   // user routes
+  const token = await client.login.query({ id: "1", name: "Ajay" });
+  console.log({ fromClient: token });
+
+  localStorage.setItem("user", JSON.stringify(token));
   const user = await client.users.get.query({ userId: "12" });
   console.log({ user });
 
